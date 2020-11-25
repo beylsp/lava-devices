@@ -1,0 +1,74 @@
+{# device_type: docker #}
+{% extends 'base.jinja2' %}
+
+{% block body %}
+
+actions:
+  deploy:
+    connections:
+      serial:
+    methods:
+      docker:
+      ssh:
+        options:
+{{ ssh_options }}
+        # primary connections get this from the device dictionary.
+        # secondary connections get this from the lava-multinode protocol support.
+        host: "{{ ssh_host|default('') }}"
+        port: {{ ssh_port|default(22) }}
+        user: "{{ ssh_user|default('root') }}"
+        identity_file: "{{ ssh_identity_file }}"
+
+  boot:
+    connections:
+      serial:
+    methods:
+      docker:
+        options:
+          cpus: {{ docker_cpus|default(0.0) }}
+          memory: {{ docker_memory|default(0) }}
+          privileged: {{ docker_privileged|default(False) }}
+{% if docker_capabilities|default([]) %}
+          capabilities:
+{% for cap in docker_capabilities %}
+          - "{{ cap }}"
+{% endfor %}
+{% else %}
+          capabilities: []
+{% endif %}
+
+{% if docker_devices|default([]) %}
+          devices:
+{% for device in docker_devices %}
+          - "{{ device }}"
+{% endfor %}
+{% else %}
+          devices: []
+{% endif %}
+{% if docker_networks|default([]) %}
+          networks:
+{% for network in docker_networks %}
+          - "{{ network }}"
+{% endfor %}
+{% else %}
+          networks: []
+{% endif %}
+
+{% if docker_volumes|default([]) %}
+          volumes:
+{% for volume in docker_volumes %}
+          - "{{ volume }}"
+{% endfor %}
+{% else %}
+          volumes: []
+{% endif %}
+{% if docker_extra_arguments|default([]) %}
+          extra_arguments:
+{% for extra_argument in docker_extra_arguments %}
+          - "{{ extra_argument }}"
+{% endfor %}
+{% else %}
+          extra_arguments: []
+{% endif %}
+      ssh:
+{% endblock body %}

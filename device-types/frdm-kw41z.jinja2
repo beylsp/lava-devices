@@ -1,0 +1,34 @@
+{# device_type: frdm-kw41z #}
+{% extends 'base.jinja2' %}
+{% set usb_vendor_id = '0d28' %}
+{% set usb_product_id = '0204' %}
+{% block body %}
+board_id: '{{ board_id|default('0000000000') }}'
+usb_vendor_id: '{{ usb_vendor_id }}'
+usb_product_id: '{{ usb_product_id }}'
+
+actions:
+  deploy:
+    connections:
+      lxc:
+    methods:
+      image:
+        parameters:
+
+  boot:
+    connections:
+      lxc:
+      serial:
+      ssh:
+    methods:
+      pyocd:
+        parameters:
+          command:
+            pyocd-flashtool
+          options:
+          - -d {{ debug|default('debug') }}
+          - -t kw41z4
+          - -f 3000000
+{% endblock body -%}
+
+{% set device_info = device_info|default([{'board_id': board_id, 'usb_vendor_id': usb_vendor_id, 'usb_product_id': usb_product_id}]) %}
