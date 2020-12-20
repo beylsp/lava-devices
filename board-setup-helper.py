@@ -16,7 +16,7 @@ class LavaXmlRpc(object):
     def __enter__(self):
         uri = 'http://%s:%s@%s/RPC2' % (self.user, self.token, self.host)
         self.xmlrpc = xmlrpc.client.ServerProxy(uri, allow_none=True)
-        return self.xmlrpc
+        return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         pass
@@ -27,7 +27,7 @@ class LavaXmlRpc(object):
             name = device_type["name"]
             description = device_type["description"]
             print("- %s" %  name)
-            self.xmlrpc.scheduler.device_types.add(name, description, display=True)
+            self.xmlrpc.scheduler.device_types.add(name, description, True, False, 0, "jobs")
 
     def add_lava_devices(self, devices):
         print("Adding lava devices")
@@ -71,6 +71,8 @@ def main():
     cli = parse_cli()
     try:
         with LavaXmlRpc(cli.host, cli.user, cli.token) as xmlrpc:
+            device_types = common.load_types(cli.definition)
+            xmlrpc.add_lava_device_types(device_types)
             devices = common.load_boards(cli.definition)
             xmlrpc.add_lava_devices(devices)
     except Exception as err:
