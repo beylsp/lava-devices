@@ -1,0 +1,24 @@
+types:
+  - name: yumi
+    description: >
+      YUMi payment terminal family.
+    vendor_id: 274c
+    product_id: 0201
+boards:
+  - name: yumi-01
+    description: >
+      YUMi payment terminal with Wi-Fi and 4G connection.
+    type: yumi
+    worker: lwrpi01.lan
+    tags:
+      - xA
+    fastboot_serial_number: 123456789
+  - name: yumi-02
+    description: >
+      YUMi payment terminal with Wi-Fi connection only.
+    type: yumi
+    worker: lwrpi01.lan
+    tags:
+      - 0B
+      - 4G
+    fastboot_serial_number: 123456789

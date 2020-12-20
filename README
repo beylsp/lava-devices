@@ -1,0 +1,23 @@
+# How to generate a new board definition
+
+1. Edit 'boards.yaml' definition file.
+
+Make sure to give your new board a unique 'name'. Add a 'type',
+'worker' name and its 'serial number'. Optionally, you can also
+define 'tags'.
+
+2. Generate device template file.
+
+    $ python3 make-board-files.py -b boards.yaml -d devices
+
+3. Commit.
+
+Check for git changes in 'devices' and commit if needed.
+
+
+# How to add a new board
+
+Once LAVA has a suitable template to use new device-types and/or devices,
+you can add them to the database.
+
+    $ python3 board-setup-helper.py -b boards.yaml -H <LAVA_HOST> -u <LAVA_USER> -t <LAVA_TOKEN>

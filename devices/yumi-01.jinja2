@@ -1,0 +1,4 @@
+{% extends 'yumi.jinja2' %}
+{% set fastboot_serial_number = '123456789' %}
+{% set adb_serial_number = fastboot_serial_number %}
+{% set static_info = [{'board_id': fastboot_serial_number}] %}
