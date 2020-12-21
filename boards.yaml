@@ -12,7 +12,7 @@ boards:
     worker: lwrpi01.lan
     tags:
       - xA
-    fastboot_serial_number: 123456789
+    fastboot_serial_number: 1e365a09dab4d76a
   - name: yumi-02
     description: >
       YUMi payment terminal with Wi-Fi connection only.
@@ -21,4 +21,4 @@ boards:
     tags:
       - 0B
       - 4G
-    fastboot_serial_number: 123456789
+    fastboot_serial_number: 1f0fa209dab3daf3
