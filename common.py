@@ -3,7 +3,7 @@ import yaml
 
 
 def load_yaml(yaml_file):
-    return yaml.load(open(yaml_file, 'r'))
+    return yaml.load(open(yaml_file, 'r'), yaml.SafeLoader)
 
 
 def load_group(definition_file, group_name):
