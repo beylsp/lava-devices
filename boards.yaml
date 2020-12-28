@@ -2,8 +2,10 @@ types:
   - name: yumi
     description: >
       YUMi payment terminal family.
-    vendor_id: 274c
-    product_id: 0201
+    vendor_id: '274c'
+    product_id: '0201'
+    fastboot_vendor_id: '0525'
+    fastboot_product_id: 'a4a5'
 boards:
   - name: yumi-01
     description: >
