@@ -28,8 +28,8 @@ def generate_device_file(devices_dir, board, types):
         board_jinja.write("{%% extends '%s.jinja2' %%}\n" % dev_type)
         board_jinja.write("{%% set fastboot_serial_number = '%s' %%}\n" % fbserial)
         board_jinja.write("{% set adb_serial_number = fastboot_serial_number %}\n")
-        board_jinja.write("{%% set device_info = [{'board_id': fastboot_serial_number, 'vendor_id': '%s', 'product_id': '%s'}, {'board_id': fastboot_serial_number, 'vendor_id': '%s', 'product_id': '%s'}] %%}\n" % (vendor, product, fbvendor, fbproduct))
-        board_jinja.write("{%% set static_info = [{'board_id': fastboot_serial_number, 'vendor_id': '%s', 'product_id': '%s'}] %%}\n" % (vendor, product))
+        board_jinja.write("{%% set device_info = [{'board_id': fastboot_serial_number, 'usb_vendor_id': '%s', 'usb_product_id': '%s'}, {'board_id': fastboot_serial_number, 'usb_vendor_id': '%s', 'usb_product_id': '%s'}] %%}\n" % (vendor, product, fbvendor, fbproduct))
+        board_jinja.write("{%% set static_info = [{'board_id': fastboot_serial_number, 'usb_vendor_id': '%s', 'usb_product_id': '%s'}] %%}\n" % (vendor, product))
 
 
 def parse_cli():

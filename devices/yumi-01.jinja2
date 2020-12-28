@@ -1,5 +1,5 @@
 {% extends 'yumi.jinja2' %}
 {% set fastboot_serial_number = '1e365a09dab4d76a' %}
 {% set adb_serial_number = fastboot_serial_number %}
-{% set device_info = [{'board_id': fastboot_serial_number, 'vendor_id': '274c', 'product_id': '0201'}, {'board_id': fastboot_serial_number, 'vendor_id': '0525', 'product_id': 'a4a5'}] %}
-{% set static_info = [{'board_id': fastboot_serial_number, 'vendor_id': '274c', 'product_id': '0201'}] %}
+{% set device_info = [{'board_id': fastboot_serial_number, 'usb_vendor_id': '274c', 'usb_product_id': '0201'}, {'board_id': fastboot_serial_number, 'usb_vendor_id': '0525', 'usb_product_id': 'a4a5'}] %}
+{% set static_info = [{'board_id': fastboot_serial_number, 'usb_vendor_id': '274c', 'usb_product_id': '0201'}] %}
