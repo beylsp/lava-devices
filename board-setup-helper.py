@@ -79,7 +79,7 @@ class LavaXmlRpc(object):
             worker_hostname = device["worker_host"]
             worker_name = device["worker"]
 
-            print("- %s (%s) on %s" % (hostname, type_name, worker_hostname))
+            print("- %s (%s) on %s" % (hostname, type_name, worker_name))
             running = self.wait_for_worker(worker_name, timeout)
             if strict and not running:
                 print("strict mode, abort")
