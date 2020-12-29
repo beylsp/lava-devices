@@ -76,7 +76,6 @@ class LavaXmlRpc(object):
         for device in devices:
             hostname = device["name"]
             type_name = device["type"]
-            worker_hostname = device["worker_host"]
             worker_name = device["worker"]
 
             print("- %s (%s) on %s" % (hostname, type_name, worker_name))
@@ -93,7 +92,7 @@ class LavaXmlRpc(object):
             failed = True
             while retry_count <= retries:
                 try:
-                    self.xmlrpc.scheduler.devices.add(hostname, type_name, worker_hostname, description)
+                    self.xmlrpc.scheduler.devices.add(hostname, type_name, worker_name, description)
                     tags = device["tags"]
                     for name in tags:
                         self.xmlrpc.scheduler.devices.tags.add(hostname, name)

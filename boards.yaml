@@ -11,7 +11,6 @@ boards:
     description: >
       YUMi payment terminal with Wi-Fi and 4G connection.
     type: yumi
-    worker_host: lwrpi01.lan
     worker: lwrpi01
     tags:
       - xA
@@ -20,7 +19,6 @@ boards:
     description: >
       YUMi payment terminal with Wi-Fi connection only.
     type: yumi
-    worker_host: lwrpi01.lan
     worker: lwrpi01
     tags:
       - 0B
