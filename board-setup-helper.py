@@ -24,14 +24,14 @@ class LavaXmlRpc(object):
     def __exit__(self, exc_type, exc_value, exc_traceback):
         pass
 
-    def worker_ready(self, worker_hostname):
+    def worker_ready(self, worker_name):
         try:
             workers = self.xmlrpc.scheduler.workers.list()
-            return worker_hostname in workers
+            return worker_name in workers
         except socket.gaierror as err:
             return False
 
-    def wait_for_worker(self, worker_hostname, timeout):
+    def wait_for_worker(self, worker_name, timeout):
         start = dt.datetime.now()
         if timeout == 0:
             wait_until = 0
@@ -41,13 +41,13 @@ class LavaXmlRpc(object):
         timed_out = True
         current = start
         while current < wait_until:
-            if worker_ready(worker_hostname):
+            if self.worker_ready(worker_name):
                 ready = True
                 timed_out = False
                 break
             current = dt.datetime.now()
         if timed_out:
-            print("timeout occurred after waiting %s seconds for worker '%s'" % (timeout, worker_hostname))
+            print("timeout occurred after waiting %s seconds for worker '%s'" % (timeout, worker_name))
         return ready
 
     def add_lava_device_types(self, device_types, retries=1):
@@ -76,10 +76,11 @@ class LavaXmlRpc(object):
         for device in devices:
             hostname = device["name"]
             type_name = device["type"]
-            worker_hostname = device["worker"]
+            worker_hostname = device["worker_host"]
+            worker_name = device["worker"]
 
             print("- %s (%s) on %s" % (hostname, type_name, worker_hostname))
-            running = self.wait_for_worker(worker_hostname, timeout)
+            running = self.wait_for_worker(worker_name, timeout)
             if strict and not running:
                 print("strict mode, abort")
                 sys.exit(1)

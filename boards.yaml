@@ -11,7 +11,8 @@ boards:
     description: >
       YUMi payment terminal with Wi-Fi and 4G connection.
     type: yumi
-    worker: lwrpi01.lan
+    worker_host: lwrpi01.lan
+    worker: lwrpi01
     tags:
       - xA
     fastboot_serial_number: 1e365a09dab4d76a
@@ -19,7 +20,8 @@ boards:
     description: >
       YUMi payment terminal with Wi-Fi connection only.
     type: yumi
-    worker: lwrpi01.lan
+    worker_host: lwrpi01.lan
+    worker: lwrpi01
     tags:
       - 0B
       - 4G
