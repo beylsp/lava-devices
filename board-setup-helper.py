@@ -81,11 +81,12 @@ class LavaXmlRpc(object):
 
             print("- %s (%s) on %s" % (hostname, type_name, worker_name))
             running = self.wait_for_worker(worker_name, timeout)
-            if strict and not running:
-                print("strict mode, abort")
-                sys.exit(1)
-            else:
-                continue
+            if not running:
+                if strict:
+                    print("strict mode, abort")
+                    sys.exit(1)
+                else:
+                    continue
 
             description = device["description"]
             retry_count = 0
